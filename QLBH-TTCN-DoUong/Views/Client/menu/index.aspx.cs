@@ -13,7 +13,11 @@ namespace QLBH_TTCN_DoUong.Views.Client
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadProduct();
+            if (!IsPostBack)
+            {
+                LoadCategori();
+                LoadProduct();
+            }
         }
 
         private void LoadProduct()
@@ -25,6 +29,17 @@ namespace QLBH_TTCN_DoUong.Views.Client
 
             LiteralControl literalControl = new LiteralControl(html);
             content_container.Controls.Add(literalControl);
+        }
+
+        private void LoadCategori()
+        {
+            nav.Controls.Clear();
+
+            CategoriController categoriController = new CategoriController();
+            string html = categoriController.Get();
+
+            LiteralControl literalControl = new LiteralControl(html);
+            nav.Controls.Add(literalControl);
         }
     }
 }

@@ -80,14 +80,17 @@
     <Content Include="Views\Client\menu\assets\css\responsive.css" />
     <Content Include="Views\Client\menu\assets\img\icon-add-item.svg" />
     <Content Include="Views\Client\menu\assets\img\icon-cart.svg" />
+    <Content Include="Views\Client\menu\assets\img\list.png" />
     <Content Include="Views\Client\menu\assets\img\navbar.png" />
     <Content Include="Views\Client\menu\index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Controllers\CategoriController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAO\CategoriDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DBConnection.cs" />

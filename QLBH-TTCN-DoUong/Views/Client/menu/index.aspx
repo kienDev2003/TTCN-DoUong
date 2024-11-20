@@ -16,11 +16,12 @@
         <div id="header">
             <div class="container">
                 <div id="head">
+                    <!-- navbar mobile -->
                     <div class="menu_item" onclick="btn_nav()">
-                        <i class="fa-solid fa-bars"></i>
+                        <img src="assets/img/list.png" alt="">
                     </div>
                     <div class="logo">
-                        <a href="#">
+                        <a href=".">
                             <h1>GrabFood</h1>
                         </a>
                     </div>
@@ -28,20 +29,13 @@
                         <a id="cart" href="#">
                             <img src="assets/img/icon-cart.svg" alt="">
                         </a>
-                        <a id="login" href="../../Administrator/login/">Đăng nhập</a>
+                        <a id="login" href="../../Administrator/login">Đăng nhập</a>
                     </div>
                 </div>
-                <div id="nav" runat="server">
-                    <a onclick="nav_item()" href="#combo">Combo ưu đãi</a>
-                    <a onclick="nav_item()" href="#new_sp">Sản phẩm mới</a>
-                    <a onclick="nav_item()" href="#banh_trang">Bánh Tráng</a>
-                    <a onclick="nav_item()" href="#do_uong">Đồ uống</a>
-                    <a onclick="nav_item()" href="#my_cay">Mỳ cay</a>
-                    <a onclick="nav_item()" href="#hoa_qua">Hoa quả</a>
+                <div id="nav" runat="server" onclick="nav_item()">
                 </div>
             </div>
         </div>
-
         <div id="content">
             <div class="container" runat="server" id="content_container">
             </div>

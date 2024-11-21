@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using QLBH_TTCN_DoUong.DAO;
 using QLBH_TTCN_DoUong.Models;
 
@@ -69,6 +70,31 @@ namespace QLBH_TTCN_DoUong.Controllers
                 html += htmlCategoori;
             }
             return html;
+        }
+
+        public List<OrderDetailModel> AddProductToOrder(int productId)
+        {
+            OrderDetailModel orderDetailModel = new OrderDetailModel();
+
+            List<OrderDetailModel> listOrderDetail = Common.ReturnOrderList("orderDetail") ?? new List<OrderDetailModel>();
+
+            if (listOrderDetail != null)
+            {
+                foreach (var order in listOrderDetail)
+                {
+                    if (order.ProductId == productId)
+                    {
+                        order.Quantity += 1;
+                        return listOrderDetail;
+                    }
+                }
+            }
+
+            orderDetailModel.ProductId = productId;
+            orderDetailModel.Quantity = 1;
+            
+            listOrderDetail.Add(orderDetailModel);
+            return listOrderDetail;
         }
     }
 }

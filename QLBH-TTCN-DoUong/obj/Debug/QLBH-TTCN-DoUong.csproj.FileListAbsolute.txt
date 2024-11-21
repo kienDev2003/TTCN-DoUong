@@ -59,3 +59,5 @@ E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\obj\Debug\QLBH-TTCN-DoUong.csproj.CoreC
 E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\obj\Debug\QLBH-TTC.24FD85B9.Up2Date
 E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\obj\Debug\QLBH-TTCN-DoUong.dll
 E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\obj\Debug\QLBH-TTCN-DoUong.pdb
+E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\bin\Newtonsoft.Json.dll
+E:\DEV\QLBH-TTCN-DoUong\QLBH-TTCN-DoUong\bin\Newtonsoft.Json.xml

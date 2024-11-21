@@ -34,7 +34,7 @@
         margin: 0px;
         overflow: hidden;
         height: 0px;
-        transition:  height 1s ease;
+        transition:  height 0.5s ease;
         /* max-height: 0px; */
     }
     #nav a{

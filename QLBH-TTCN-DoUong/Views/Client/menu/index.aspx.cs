@@ -18,6 +18,12 @@ namespace QLBH_TTCN_DoUong.Views.Client
             {
                 try
                 {
+                    if (Request.QueryString["tableid"] == null)
+                    {
+                        string scriptNoti = Common.Create_noti_chain("Table ID Not Get ! Bad Request", "error");
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
+                        return;
+                    }
                     int tableId = int.Parse(Request.QueryString["tableid"]);
 
                     if(tableId >= 0)
@@ -27,9 +33,8 @@ namespace QLBH_TTCN_DoUong.Views.Client
                     }
                 }catch(Exception ex)
                 {
-                    string scriptNoti = Common.Create_noti_chain("Table ID Not Get ! Bad Request","error");
+                    string scriptNoti = ex.Message;
                     ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
-                    return;
                 }
             }
         }

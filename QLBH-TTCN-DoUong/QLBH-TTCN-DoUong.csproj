@@ -78,6 +78,15 @@
     <Content Include="Views\Administrator\login\asset\js\login.js" />
     <Content Include="Views\Administrator\login\asset\responsive\login.css" />
     <Content Include="Views\Administrator\login\index.aspx" />
+    <Content Include="Views\Client\cart\assets\css\main.css" />
+    <Content Include="Views\Client\cart\assets\css\reset.css" />
+    <Content Include="Views\Client\cart\assets\css\responsive.css" />
+    <Content Include="Views\Client\cart\assets\img\icon-add-item.svg" />
+    <Content Include="Views\Client\cart\assets\img\icon-cart.svg" />
+    <Content Include="Views\Client\cart\assets\img\list.png" />
+    <Content Include="Views\Client\cart\assets\img\navbar.png" />
+    <Content Include="Views\Client\cart\assets\js\script_cart.js" />
+    <Content Include="Views\Client\cart\index.aspx" />
     <Content Include="Views\Client\menu\assets\css\main.css" />
     <Content Include="Views\Client\menu\assets\css\reset.css" />
     <Content Include="Views\Client\menu\assets\css\responsive.css" />
@@ -85,6 +94,7 @@
     <Content Include="Views\Client\menu\assets\img\icon-cart.svg" />
     <Content Include="Views\Client\menu\assets\img\list.png" />
     <Content Include="Views\Client\menu\assets\img\navbar.png" />
+    <Content Include="Views\Client\menu\assets\js\script_menu.js" />
     <Content Include="Views\Client\menu\index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -110,6 +120,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Administrator\login\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Client\cart\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Client\cart\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Client\menu\index.aspx.cs">

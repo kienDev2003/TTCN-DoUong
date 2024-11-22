@@ -15,7 +15,7 @@ namespace QLBH_TTCN
 
         public DBConnection()
         {
-            strConn = ConfigurationManager.ConnectionStrings["strConn"].ConnectionString;
+            strConn = ConfigurationManager.ConnectionStrings["strConn_local"].ConnectionString;
             conn = new SqlConnection(strConn);
             conn.Open();
         }

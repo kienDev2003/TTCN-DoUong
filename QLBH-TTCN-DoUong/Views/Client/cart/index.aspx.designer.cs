@@ -13,23 +13,5 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
 
     public partial class index
     {
-
-        /// <summary>
-        /// table_Content control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl table_Content;
-
-        /// <summary>
-        /// txtTotalPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtTotalPrice;
     }
 }

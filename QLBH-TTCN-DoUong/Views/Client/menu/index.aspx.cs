@@ -20,7 +20,7 @@ namespace QLBH_TTCN_DoUong.Views.Client
                 {
                     if (Request.QueryString["tableid"] == null)
                     {
-                        string scriptNoti = Common.Create_noti_chain("Table ID Not Get ! Bad Request", "error");
+                        string scriptNoti = Common.Create_noti_chain("Không có số bàn. Truy cập bị từ chối", "error");
                         ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
                         return;
                     }
@@ -62,16 +62,12 @@ namespace QLBH_TTCN_DoUong.Views.Client
         }
 
         [WebMethod]
-        public static string AddProductToOrderDetail(int productId)
+        public static bool CheckRawMaterial(int productId)
         {
-            List<OrderDetailModel> listOrderDetaill = new List<OrderDetailModel>();
             ProductController productController = new ProductController();
 
-            listOrderDetaill = productController.AddProductToOrder(productId);
-
-            Common.AddCookieOrder("orderDetail", listOrderDetaill, 30);
-
-            return listOrderDetaill.Count.ToString();
+            if(productController.RawMaterial(productId)) return true;
+            return false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -95,6 +96,30 @@ namespace QLBH_TTCN_DoUong.Controllers
             
             listOrderDetail.Add(orderDetailModel);
             return listOrderDetail;
+        }
+
+        public bool RawMaterial(int productID)
+        {
+            IngredientDAO ingredientDAO = new IngredientDAO();
+            RecipeDAO recipeDAO = new RecipeDAO();
+
+            List<RecipeModel> listRecipe = recipeDAO.getByProductId(productID);
+
+            if (listRecipe.Count <= 0) return false;
+
+            for(int i = 0;i < listRecipe.Count; i++)
+            {
+                RecipeModel recipe = listRecipe[i];
+                IngredientModel ingredient = new IngredientModel();
+
+                ingredient = ingredientDAO.getByIngredientID(recipe.ingredientID);
+
+                int check = ingredient.ingredientQuantity - recipe.recipeMaterialQty;
+
+                if (check >= 0) continue;
+                return false;
+            }
+            return true;
         }
     }
 }

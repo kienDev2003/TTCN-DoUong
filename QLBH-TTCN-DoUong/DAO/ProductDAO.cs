@@ -42,7 +42,7 @@ namespace QLBH_TTCN_DoUong.DAO
         public List<Dictionary<CategoriModel, List<ProductModel>>> GetProductANDCategori()
         {
             List<Dictionary<CategoriModel, List<ProductModel>>> listProductByCategori = new List<Dictionary<CategoriModel, List<ProductModel>>>();
-            using (SqlDataReader readerCategori = dBConnection.ExecuteReader("Categori_Select_All", null))
+            using (SqlDataReader readerCategori = dBConnection.ExecuteReader("Categoris_Select", null))
             {
                 while (readerCategori.Read())
                 {
@@ -50,25 +50,24 @@ namespace QLBH_TTCN_DoUong.DAO
                     List<ProductModel> listProduct = new List<ProductModel>();
                     Dictionary<CategoriModel, List<ProductModel>> productByCategori = new Dictionary<CategoriModel, List<ProductModel>>();
 
-                    categori.CategoriId = int.Parse(readerCategori["CategoriId"].ToString());
-                    categori.Name = readerCategori["Name"].ToString();
+                    categori.CategoriId = int.Parse(readerCategori["Categori_ID"].ToString());
+                    categori.Name = readerCategori["Categori_Name"].ToString();
 
                     Dictionary<string, object> prameter = new Dictionary<string, object>()
                     {
-                        {"@CategoriId",categori.CategoriId }
+                        {"@categoriId",categori.CategoriId }
                     };
 
-                    using (SqlDataReader readerProductByCategori = dBConnection.ExecuteReader("Product_Select_By_Categori", prameter))
+                    using (SqlDataReader readerProductByCategori = dBConnection.ExecuteReader("Product_Select_By_Categoris", prameter))
                     {
                         while (readerProductByCategori.Read())
                         {
                             ProductModel product = new ProductModel();
-                            product.ProductId = int.Parse(readerProductByCategori["ProductId"].ToString());
-                            product.Name = readerProductByCategori["Name"].ToString();
-                            product.Description = readerProductByCategori["Des"].ToString();
-                            product.Price = float.Parse(readerProductByCategori["Price"].ToString());
-                            product.Sell = bool.Parse(readerProductByCategori["Sell"].ToString());
-                            product.PicUrl = readerProductByCategori["PicUrl"].ToString();
+                            product.ProductId = int.Parse(readerProductByCategori["Product_ID"].ToString());
+                            product.Name = readerProductByCategori["Product_Name"].ToString();
+                            product.Description = readerProductByCategori["Product_Describe"].ToString();
+                            product.Price = float.Parse(readerProductByCategori["Product_Price"].ToString());
+                            product.PicUrl = readerProductByCategori["Product_Image_Url"].ToString();
 
                             listProduct.Add(product);
                         }

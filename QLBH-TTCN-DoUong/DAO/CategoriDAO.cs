@@ -20,13 +20,13 @@ namespace QLBH_TTCN_DoUong.DAO
         {
             List<CategoriModel> listCategori = new List<CategoriModel>();
 
-            using(SqlDataReader reader = dBConnection.ExecuteReader("Categori_Select_All", null))
+            using(SqlDataReader reader = dBConnection.ExecuteReader("Categoris_Select", null))
             {
                 while (reader.Read())
                 {
                     CategoriModel categori = new CategoriModel();
-                    categori.CategoriId = int.Parse(reader["CategoriId"].ToString());
-                    categori.Name = reader["Name"].ToString();
+                    categori.CategoriId = int.Parse(reader["Categori_ID"].ToString());
+                    categori.Name = reader["Categori_Name"].ToString();
 
                     listCategori.Add(categori);
                 }

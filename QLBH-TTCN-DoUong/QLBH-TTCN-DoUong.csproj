@@ -99,12 +99,14 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Controllers\CategoriController.cs" />
+    <Compile Include="Controllers\PaymentMethodController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\CategoriDAO.cs" />
     <Compile Include="DAO\IngredientDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderDetailDAO.cs" />
+    <Compile Include="DAO\PaymentMethodDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\OrderRequest.cs" />
+    <Compile Include="Models\PaymentMethodModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Models\UserModel.cs" />

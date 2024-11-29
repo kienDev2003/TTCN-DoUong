@@ -28,6 +28,7 @@ namespace QLBH_TTCN_DoUong.Views.Client
 
                     if(tableId >= 0)
                     {
+                        Session["tableID"] = tableId;
                         LoadCategori();
                         LoadProduct();
                     }

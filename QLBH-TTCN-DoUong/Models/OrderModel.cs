@@ -7,9 +7,9 @@ namespace QLBH_TTCN_DoUong.Models
 {
     public class OrderModel
     {
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         public int TableId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
         public float TotalAmount { get; set; }
         public int PaymentMethodId { get; set; }
 

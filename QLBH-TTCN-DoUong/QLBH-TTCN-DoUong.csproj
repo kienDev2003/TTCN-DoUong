@@ -85,6 +85,10 @@
     <Content Include="Views\Client\cart\assets\img\navbar.png" />
     <Content Include="Views\Client\cart\assets\js\scripts.js" />
     <Content Include="Views\Client\cart\index.aspx" />
+    <Content Include="Views\Client\checkout\assets\css\main.css" />
+    <Content Include="Views\Client\checkout\assets\css\res.css" />
+    <Content Include="Views\Client\checkout\assets\img\image.jpg" />
+    <Content Include="Views\Client\checkout\index.aspx" />
     <Content Include="Views\Client\menu\assets\css\main.css" />
     <Content Include="Views\Client\menu\assets\css\reset.css" />
     <Content Include="Views\Client\menu\assets\css\responsive.css" />
@@ -133,6 +137,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Client\cart\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Client\checkout\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Client\checkout\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Client\menu\index.aspx.cs">

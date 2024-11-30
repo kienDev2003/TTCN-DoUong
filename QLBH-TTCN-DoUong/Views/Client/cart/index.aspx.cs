@@ -77,7 +77,6 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
                 {order, listOrderDetail}
             };
 
-            HttpContext.Current.Session["paymentMethod"] = orderRequest.PaymentMethod_ID;
             HttpContext.Current.Session["order"] = _order;
 
             return new

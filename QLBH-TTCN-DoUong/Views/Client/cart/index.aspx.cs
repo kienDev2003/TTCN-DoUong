@@ -40,7 +40,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
             List<OrderDetailModel> listOrderDetail = new List<OrderDetailModel>();
 
             order.OrderId = DateTime.Now.ToString("yyyyMMddHHmmssffff");
-            order.OrderDate = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy");
+            order.OrderDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             order.PaymentMethodId = orderRequest.PaymentMethod_ID;
             order.TableId = int.Parse(HttpContext.Current.Session["tableID"].ToString());
             order.TotalAmount = float.Parse(orderRequest.TotalPrice.ToString());

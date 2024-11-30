@@ -10,25 +10,25 @@ namespace QLBH_TTCN_DoUong
 {
     public class Common
     {
-        public static string MD5Hash(string input)
+        public static string SHA_256_Hash(string input)
         {
-            // Tạo đối tượng MD5
-            using (MD5 md5 = MD5.Create())
+            // Tạo một đối tượng SHA256
+            using (SHA256 sha256 = SHA256.Create())
             {
-                // Chuyển chuỗi đầu vào thành mảng byte
-                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                // Chuyển chuỗi đầu vào thành mảng byte sử dụng Encoding.UTF8
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
 
-                // Tính toán giá trị băm MD5
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                // Tính toán băm SHA-256
+                byte[] hashBytes = sha256.ComputeHash(inputBytes);
 
-                // Chuyển mảng byte kết quả thành chuỗi Hex (mã hex)
-                StringBuilder sb = new StringBuilder();
+                // Chuyển mảng byte thành chuỗi hexa và loại bỏ dấu "-" giữa các byte
+                StringBuilder hexString = new StringBuilder();
                 foreach (byte b in hashBytes)
                 {
-                    sb.Append(b.ToString("x2"));  // "x2" sẽ tạo ra chuỗi hex
+                    hexString.Append(b.ToString("x2"));  // Chuyển byte thành chuỗi hex với 2 ký tự
                 }
 
-                return sb.ToString();
+                return hexString.ToString();
             }
         }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using QLBH_TTCN_DoUong.DAO;
 using QLBH_TTCN_DoUong.Models;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -34,8 +35,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
 
                     if (_order.PaymentMethodId != int.Parse(ConfigurationManager.ConnectionStrings["payment_bank_id"].ConnectionString))
                     {
-                        bodyContent.Controls.Clear();
-
+                        AddOrderAndOrderDetails(order);
                         string scriptNoti = $@"
                                                 document.getElementById('bodyContent').innerHTML = ``;
                                                 Swal.fire({{
@@ -50,12 +50,24 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
                                                 }});
                                                ";
                         ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
-                        return;
                     }
                     else
                     {
                         loadContentPayment(_order);
                     }
+                }
+                else
+                {
+                    string scriptNoti = $@"
+                                            document.getElementById('bodyContent').innerHTML = ``;
+                                            Swal.fire({{
+                                                title: 'Thông báo',
+                                                text: 'Từ chối truy cập !',
+                                                icon: 'error',
+                                                confirmButtonText: 'OK'
+                                            }});
+                                            ";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
                 }
             }
         }
@@ -66,7 +78,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             string name_bank = ConfigurationManager.ConnectionStrings["name_bank"].ConnectionString;
             string stk_bank = ConfigurationManager.ConnectionStrings["stk_bank"].ConnectionString;
             string template_bank = ConfigurationManager.ConnectionStrings["template_bank"].ConnectionString;
-            string content_bank = Common.MD5Hash(DateTime.Now.ToString("yyyyMMddHHmmssffff"));
+            string content_bank = DateTime.Now.ToString("yyyyMMddHHmmssffff");
 
             string url_qr_bank = $"https://img.vietqr.io/image/{id_bank}-{stk_bank}-{template_bank}?amount={order.TotalAmount.ToString()}&addInfo={content_bank}&accountName={name_bank}";
             img_qr_bank.Src = url_qr_bank;
@@ -75,6 +87,37 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             account_number.Value = stk_bank;
             bank_content.Value = content_bank;
             amount.Value = order.TotalAmount.ToString();
+        }
+
+        private void AddOrderAndOrderDetails(Dictionary<OrderModel, List<OrderDetailModel>> order)
+        {
+            OrderModel _order = new OrderModel();
+            List<OrderDetailModel> _orderDetails = new List<OrderDetailModel>();
+
+            foreach (var item in order)
+            {
+                _order = item.Key;
+                _orderDetails = item.Value;
+            }
+            int check = -1;
+            check = AddOrder(_order);
+            if(check > 0) check = AddOrderDetails(_orderDetails);
+        }
+
+        private int AddOrder(OrderModel order)
+        {
+            OrderDAO orderDAO = new OrderDAO();
+            int kq = -1;
+            kq = orderDAO.AddOrder(order);
+            return kq;
+        }
+
+        private int AddOrderDetails(List<OrderDetailModel> orderDetails)
+        {
+            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+            int kq = -1;
+            kq = orderDetailDAO.AddOrderDetails(orderDetails);
+            return kq;
         }
     }
 }

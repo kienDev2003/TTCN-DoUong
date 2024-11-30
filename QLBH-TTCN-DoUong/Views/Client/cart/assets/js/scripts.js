@@ -32,6 +32,7 @@ function saveOrderDetailsToCookie(nameCookie, timeoutCookie, orderDetails) {
 function renderTable() {
     var tableContent = document.getElementById('table_content');
     tableContent.innerHTML = ``;
+    var html = ``;
 
     orderDetails = JSON.parse(getCookie("OrderDetails"));
     for (let i = 0; i < orderDetails.length; i++) {
@@ -41,8 +42,8 @@ function renderTable() {
         let productPrice = orderDetails[i].price;
         let productId = orderDetails[i].productId;
 
-        let html = `
-			<tr class="parent">
+        let temp = `
+			<tr>
 				  <td class='d-flex align-items-center'>
 					<div>
 					  <p class='mb-1'>${productName}</p>
@@ -62,10 +63,11 @@ function renderTable() {
 				  </td>
 				</tr>
 		`;
-
-        tableContent.innerHTML = html;
-        changeTotalPrice();
+        html += temp;
     }
+    console.log(html);
+    tableContent.innerHTML = html;
+    changeTotalPrice();
 }
 
 //hàm thay đổi số lượng sản phẩm

@@ -21,7 +21,7 @@ namespace QLBH_TTCN_DoUong.Controllers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return userOutput;
             
             int UserId = userDAO.GetId(username);
-            password = Common.MD5Hash(password+UserId.ToString());
+            password = Common.SHA_256_Hash(password+UserId.ToString());
             
             userOutput = userDAO.Login(username, password);
             return userOutput;
@@ -38,7 +38,7 @@ namespace QLBH_TTCN_DoUong.Controllers
             if (temp < 0) return -3;
 
             userInput.Id = int.Parse(userDAO.GetId(userInput.userName).ToString());
-            userInput.password = Common.MD5Hash(userInput.password + userInput.Id.ToString());
+            userInput.password = Common.SHA_256_Hash(userInput.password + userInput.Id.ToString());
 
             int exec = userDAO.Update(userInput);
             return exec;

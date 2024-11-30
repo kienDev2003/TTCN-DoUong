@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting;
 using System.Web;
 using QLBH_TTCN;
@@ -17,6 +18,28 @@ namespace QLBH_TTCN_DoUong.DAO
         {
             dBConnection = new DBConnection();
         }
+
+        public ProductModel GetByID(int productID)
+        {
+            ProductModel model = new ProductModel();
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@product_ID",productID}
+            };
+            using(SqlDataReader dataReader = dBConnection.ExecuteReader("Products_Select", parameter))
+            {
+                if(dataReader.Read())
+                {
+                    model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
+                    model.Product_Name = dataReader["Product_Name"].ToString();
+                    model.Product_Describe = dataReader["Product_Describe"].ToString();
+                    model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
+                    model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
+                    model.Product_Image_Url = dataReader["Product_Image_Url"].ToString();
+                }
+            }
+            return model;
+        }
         public List<ProductModel> Get()
         {
             List<ProductModel> listProduct = new List<ProductModel>();
@@ -24,16 +47,15 @@ namespace QLBH_TTCN_DoUong.DAO
             {
                 while (dataReader.Read())
                 {
-                    ProductModel product = new ProductModel();
-                    product.ProductId = int.Parse(dataReader["ProductId"].ToString());
-                    product.Name = dataReader["Name"].ToString();
-                    product.Description = dataReader["Des"].ToString();
-                    product.Price = float.Parse(dataReader["Price"].ToString());
-                    product.CategoriId = int.Parse(dataReader["CategoriId"].ToString());
-                    product.Sell = bool.Parse(dataReader["Sell"].ToString());
-                    product.PicUrl = dataReader["PicUrl"].ToString();
+                    ProductModel model = new ProductModel();
+                    model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
+                    model.Product_Name = dataReader["Product_Name"].ToString();
+                    model.Product_Describe = dataReader["Product_Describe"].ToString();
+                    model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
+                    model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
+                    model.Product_Image_Url = dataReader["Product_Image_Url"].ToString();
 
-                    listProduct.Add(product);
+                    listProduct.Add(model);
                 }
             }
             return listProduct;
@@ -62,14 +84,15 @@ namespace QLBH_TTCN_DoUong.DAO
                     {
                         while (readerProductByCategori.Read())
                         {
-                            ProductModel product = new ProductModel();
-                            product.ProductId = int.Parse(readerProductByCategori["Product_ID"].ToString());
-                            product.Name = readerProductByCategori["Product_Name"].ToString();
-                            product.Description = readerProductByCategori["Product_Describe"].ToString();
-                            product.Price = float.Parse(readerProductByCategori["Product_Price"].ToString());
-                            product.PicUrl = readerProductByCategori["Product_Image_Url"].ToString();
+                            ProductModel model = new ProductModel();
+                            model.Product_Id = int.Parse(readerProductByCategori["Product_ID"].ToString());
+                            model.Product_Name = readerProductByCategori["Product_Name"].ToString();
+                            model.Product_Describe = readerProductByCategori["Product_Describe"].ToString();
+                            model.Product_Price = float.Parse(readerProductByCategori["Product_Price"].ToString());
+                            model.Product_Availability = bool.Parse(readerProductByCategori["Product_Availability"].ToString());
+                            model.Product_Image_Url = readerProductByCategori["Product_Image_Url"].ToString();
 
-                            listProduct.Add(product);
+                            listProduct.Add(model);
                         }
                         productByCategori.Add(categori, listProduct);
                     }

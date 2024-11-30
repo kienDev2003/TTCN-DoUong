@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -33,7 +34,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
         }
 
         [WebMethod]
-        public static string checkOrder(OrderRequest orderRequest)
+        public static object checkOrder(OrderRequest orderRequest)
         {
             OrderModel order = new OrderModel();
             List<OrderDetailModel> listOrderDetail = new List<OrderDetailModel>();
@@ -52,7 +53,38 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
                 listOrderDetail[i].TotalPrice = listOrderDetail[i].Price * listOrderDetail[i].Quantity;
             }
 
-            return "ok";
+            for(int i = 0; i < listOrderDetail.Count; i++)
+            {
+                ProductController productController = new ProductController();
+
+                bool checkRawMaterial = productController.RawMaterial(listOrderDetail[i].ProductId, listOrderDetail[i].Quantity);
+
+                ProductModel product = new ProductModel();
+                product = productController.get(listOrderDetail[i].ProductId);
+                
+                if (!checkRawMaterial)  
+                {
+                    return new
+                    {
+                        key = -1,
+                        content = $"Sản phẩm {product.Product_Name} không đủ nguyên liệu làm {listOrderDetail[i].Quantity} cốc. Vui lòng giảm số lượng sản phẩm hoặc chọn sản phẩm khác !"
+                    };
+                }
+            }
+
+            Dictionary<OrderModel, List<OrderDetailModel>> _order = new Dictionary<OrderModel, List<OrderDetailModel>>()
+            {
+                {order, listOrderDetail}
+            };
+
+            HttpContext.Current.Session["paymentMethod"] = orderRequest.PaymentMethod_ID;
+            HttpContext.Current.Session["order"] = _order;
+
+            return new
+            {
+                key = 1,
+                content = "../checkout/"
+            };
         }
     }
 }

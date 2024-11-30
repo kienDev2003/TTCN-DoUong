@@ -7,13 +7,12 @@ namespace QLBH_TTCN_DoUong.Models
 {
     public class ProductModel
     {
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public float Price { get; set; }
-        public int UnitId { get; set; }
-        public int CategoriId { get; set; }
-        public bool Sell {  get; set; }
-        public string PicUrl { get; set; }
+        public int Product_Id { get; set; }
+        public string Product_Name { get; set; }
+        public string Product_Describe { get; set; }
+        public float Product_Price { get; set; }
+        public int Product_Categori { get; set; }
+        public bool Product_Availability {  get; set; }
+        public string Product_Image_Url { get; set; }
     }
 }

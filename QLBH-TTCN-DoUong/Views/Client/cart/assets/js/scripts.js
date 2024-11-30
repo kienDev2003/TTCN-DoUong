@@ -103,6 +103,7 @@ function deleteProduct(input) {
     orderDetails.splice(input, 1);
     saveOrderDetailsToCookie("OrderDetails", 360, orderDetails);
     renderTable();
+    changeTotalPrice();
 }
 
 //hàm render Order
@@ -128,8 +129,10 @@ function checkOut() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (respone) {
-
-            Swal.fire({ title: 'Thông báo!', text: 'TEST', icon: 'warning', confirmButtonText: 'OK' });
+            if (respone.d.key === -1) {
+                Swal.fire({ title: 'Thông báo!', text: respone.d.content, icon: 'warning', confirmButtonText: 'OK' });
+            }
+            else window.location.href = respone.d.content;
 
         },
         error: function (xhr, status, error) {

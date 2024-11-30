@@ -30,7 +30,7 @@ $(document).on('click', 'div.btnAddItem', function () {
     $.ajax({
         type: "POST",
         url: "index.aspx/CheckRawMaterial",
-        data: JSON.stringify({ productId: buttonId }),
+        data: JSON.stringify({ productId: buttonId , quantity: 1}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (respone) {

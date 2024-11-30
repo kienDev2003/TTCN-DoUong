@@ -26,13 +26,14 @@ namespace QLBH_TTCN_DoUong.Views.Client
                     }
                     int tableId = int.Parse(Request.QueryString["tableid"]);
 
-                    if(tableId >= 0)
+                    if (tableId >= 0)
                     {
                         Session["tableID"] = tableId;
                         LoadCategori();
                         LoadProduct();
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     string scriptNoti = ex.Message;
                     ClientScript.RegisterStartupScript(this.GetType(), "alert", scriptNoti, true);
@@ -63,11 +64,11 @@ namespace QLBH_TTCN_DoUong.Views.Client
         }
 
         [WebMethod]
-        public static bool CheckRawMaterial(int productId)
+        public static bool CheckRawMaterial(int productId, int quantity)
         {
             ProductController productController = new ProductController();
 
-            if(productController.RawMaterial(productId)) return true;
+            if (productController.RawMaterial(productId, quantity)) return true;
             return false;
         }
     }

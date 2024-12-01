@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="amount">Số tiền:</label>
                     <div class="input-group">
-                        <input type="text" id="amount" runat="server" name="amount" required>
+                        <input type="text" readonly id="amount" runat="server" name="amount" required>
                         <button type="button" class="copy-btn" onclick="copyText('amount')">Sao chép</button>
                     </div>
                 </div>
@@ -76,7 +76,46 @@
     <form runat="server">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var contentPayment = document.getElementById("bank_content").value;
+                var pricePayment = document.getElementById("amount").value;
 
+                function checkPayment() {
+                    $.ajax({
+                        type: "POST",
+                        url: "index.aspx/CheckPaymentBank",
+                        data: JSON.stringify({ content_payment: contentPayment, price: pricePayment }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.d === true) {
+                                document.getElementById("bodyContent").innerHTML = ``;
+
+                                Swal.fire(
+                                    'Thông báo',
+                                    'Thanh toán thành công !',
+                                    'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = '../thanks/';
+                                    }
+                                });
+                            }
+                            else {
+                                setTimeout(checkPayment, 3000);
+                            }
+                        },
+                        failure: function (response) {
+                            setTimeout(checkPayment, 3000);
+                        }
+                    });
+                }
+
+                checkPayment();
+            });
+
+        </script>
         <script>
             function copyText(id) {
                 var copyText = document.getElementById(id);

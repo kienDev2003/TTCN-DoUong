@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using QLBH_TTCN_DoUong.DAO;
@@ -35,7 +37,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
 
                     if (_order.PaymentMethodId != int.Parse(ConfigurationManager.ConnectionStrings["payment_bank_id"].ConnectionString))
                     {
-                        AddOrderAndOrderDetails(order);
+                        AddOrderAndOrderDetails();
                         string scriptNoti = $@"
                                                 document.getElementById('bodyContent').innerHTML = ``;
                                                 Swal.fire({{
@@ -78,19 +80,26 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             string name_bank = ConfigurationManager.ConnectionStrings["name_bank"].ConnectionString;
             string stk_bank = ConfigurationManager.ConnectionStrings["stk_bank"].ConnectionString;
             string template_bank = ConfigurationManager.ConnectionStrings["template_bank"].ConnectionString;
-            string content_bank = DateTime.Now.ToString("yyyyMMddHHmmssffff");
+            string content_bank = Common.MD5_Hash(DateTime.Now.ToString("yyyyMMddHHmmssffff"));
+            string totalPrice_bank = order.TotalAmount.ToString();
 
-            string url_qr_bank = $"https://img.vietqr.io/image/{id_bank}-{stk_bank}-{template_bank}?amount={order.TotalAmount.ToString()}&addInfo={content_bank}&accountName={name_bank}";
+            string url_qr_bank = $"https://img.vietqr.io/image/{id_bank}-{stk_bank}-{template_bank}?amount={totalPrice_bank}&addInfo={content_bank}&accountName={name_bank}";
             img_qr_bank.Src = url_qr_bank;
             bank.Value = id_bank;
             nameAccount.Value = name_bank;
             account_number.Value = stk_bank;
             bank_content.Value = content_bank;
-            amount.Value = order.TotalAmount.ToString();
+            amount.Value = totalPrice_bank;
         }
 
-        private void AddOrderAndOrderDetails(Dictionary<OrderModel, List<OrderDetailModel>> order)
+        [WebMethod]
+        public static void AddOrderAndOrderDetails()
         {
+            Dictionary<OrderModel, List<OrderDetailModel>> order = new Dictionary<OrderModel, List<OrderDetailModel>>();
+            if (HttpContext.Current.Session["order"] != null)
+            {
+                order = HttpContext.Current.Session["order"] as Dictionary<OrderModel, List<OrderDetailModel>>;
+            }
             OrderModel _order = new OrderModel();
             List<OrderDetailModel> _orderDetails = new List<OrderDetailModel>();
 
@@ -101,10 +110,10 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             }
             int check = -1;
             check = AddOrder(_order);
-            if(check > 0) check = AddOrderDetails(_orderDetails);
+            if (check > 0) check = AddOrderDetails(_orderDetails);
         }
 
-        private int AddOrder(OrderModel order)
+        private static int AddOrder(OrderModel order)
         {
             OrderDAO orderDAO = new OrderDAO();
             int kq = -1;
@@ -112,12 +121,32 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             return kq;
         }
 
-        private int AddOrderDetails(List<OrderDetailModel> orderDetails)
+        private static int AddOrderDetails(List<OrderDetailModel> orderDetails)
         {
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
             int kq = -1;
             kq = orderDetailDAO.AddOrderDetails(orderDetails);
             return kq;
+        }
+        
+        [WebMethod]
+        public static bool CheckPaymentBank(string content_payment, string price)
+        {
+            bool status_payment = false;
+            
+            string url_check_payment = $"https://script.google.com/macros/s/AKfycby7-FooKyZ9DEPjMj9DbbcpXX8V2KOyWgh9lVd6tGgfmnnulB-aFf_mZRW-NI-Ks1C9rw/exec?description={content_payment}&value={price}";
+            using(WebClient webClient = new WebClient())
+            {
+                string status = webClient.DownloadString(url_check_payment);
+                if (status.Trim().Equals("true", StringComparison.OrdinalIgnoreCase)) status_payment = true;
+            }
+
+            if(status_payment)
+            {
+                AddOrderAndOrderDetails();
+                return true;
+            }
+            return false;
         }
     }
 }

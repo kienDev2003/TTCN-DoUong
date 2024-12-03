@@ -58,5 +58,17 @@ namespace QLBH_TTCN_DoUong.DAO
             }
             return ingredient;
         }
+
+        public int UpdateQuantity(int id,int quantity)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@ingredient_ID",id },
+                {"@ingredient_Quantity", quantity}
+            };
+
+            int check = dBConnection.ExecuteNonQuery("Ingredients_UpdateQuantity", parameter);
+            return check;
+        }
     }
 }

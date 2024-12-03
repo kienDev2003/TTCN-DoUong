@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using QLBH_TTCN_DoUong.Controllers;
 using QLBH_TTCN_DoUong.DAO;
 using QLBH_TTCN_DoUong.Models;
 using static System.Net.Mime.MediaTypeNames;
@@ -37,7 +38,15 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
 
                     if (_order.PaymentMethodId != int.Parse(ConfigurationManager.ConnectionStrings["payment_bank_id"].ConnectionString))
                     {
-                        AddOrderAndOrderDetails();
+                        try
+                        {
+                            AddOrderAndOrderDetails();
+                            UpdateIngredientQuantity();
+                        }
+                        catch(Exception ex)
+                        {
+                            Response.Write(ex.Message);
+                        }
                         string scriptNoti = $@"
                                                 document.getElementById('bodyContent').innerHTML = ``;
                                                 Swal.fire({{
@@ -128,23 +137,74 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
             kq = orderDetailDAO.AddOrderDetails(orderDetails);
             return kq;
         }
-        
+
+        private static int UpdateIngredientQuantity()
+        {
+            Dictionary<OrderModel, List<OrderDetailModel>> order = new Dictionary<OrderModel, List<OrderDetailModel>>();
+            if (HttpContext.Current.Session["order"] != null)
+            {
+                order = HttpContext.Current.Session["order"] as Dictionary<OrderModel, List<OrderDetailModel>>;
+            }
+            OrderModel _order = new OrderModel();
+            List<OrderDetailModel> _orderDetails = new List<OrderDetailModel>();
+
+            foreach (var item in order)
+            {
+                _order = item.Key;
+                _orderDetails = item.Value;
+            }
+
+            int kq = 0;
+            for(int i=0;i<_orderDetails.Count;i++)
+            {
+                RecipeDAO recipeDAO = new RecipeDAO();
+                IngredientDAO ingredientDAO = new IngredientDAO();
+                List<RecipeModel> recipes = new List<RecipeModel>();
+
+                recipes = recipeDAO.getByProductId(_orderDetails[i].ProductId);
+
+                for(int j=0;j<recipes.Count;j++)
+                {
+                    RecipeModel recipe = recipes[j];
+                    IngredientModel ingredient = new IngredientModel();
+
+                    ingredient = ingredientDAO.getByIngredientID(recipe.ingredientID);
+
+                    int lastQuantity = ingredient.ingredientQuantity - recipe.recipeMaterialQty * _orderDetails[i].Quantity;
+
+                    int temp = ingredientDAO.UpdateQuantity(recipe.ingredientID, lastQuantity);
+
+                    kq += temp;
+                }
+            }
+            return kq;
+        }
+
         [WebMethod]
         public static bool CheckPaymentBank(string content_payment, string price)
         {
             bool status_payment = false;
-            
+
             string url_check_payment = $"https://script.google.com/macros/s/AKfycby7-FooKyZ9DEPjMj9DbbcpXX8V2KOyWgh9lVd6tGgfmnnulB-aFf_mZRW-NI-Ks1C9rw/exec?description={content_payment}&value={price}";
-            using(WebClient webClient = new WebClient())
+            using (WebClient webClient = new WebClient())
             {
                 string status = webClient.DownloadString(url_check_payment);
                 if (status.Trim().Equals("true", StringComparison.OrdinalIgnoreCase)) status_payment = true;
             }
 
-            if(status_payment)
+            if (status_payment)
             {
-                AddOrderAndOrderDetails();
-                return true;
+                try
+                {
+                    AddOrderAndOrderDetails();
+                    UpdateIngredientQuantity();
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }
+                
             }
             return false;
         }

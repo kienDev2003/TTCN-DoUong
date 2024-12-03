@@ -12,6 +12,7 @@ namespace QLBH_TTCN_DoUong.Models
         public string OrderDate { get; set; }
         public float TotalAmount { get; set; }
         public int PaymentMethodId { get; set; }
+        public bool Served {  get; set; }
 
     }
 }

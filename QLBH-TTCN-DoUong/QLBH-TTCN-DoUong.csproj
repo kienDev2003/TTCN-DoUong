@@ -78,6 +78,13 @@
     <Content Include="Views\Administrator\login\asset\js\login.js" />
     <Content Include="Views\Administrator\login\asset\responsive\login.css" />
     <Content Include="Views\Administrator\login\index.aspx" />
+    <Content Include="Views\Bar\assets\css\global.css" />
+    <Content Include="Views\Bar\assets\css\main.css" />
+    <Content Include="Views\Bar\assets\css\orderDetails.css" />
+    <Content Include="Views\Bar\assets\css\reset.css" />
+    <Content Include="Views\Bar\assets\img\images %281%29.png" />
+    <Content Include="Views\Bar\orderDetails.aspx" />
+    <Content Include="Views\Bar\index.aspx" />
     <Content Include="Views\Client\cart\assets\css\styles.css" />
     <Content Include="Views\Client\cart\assets\img\icon-add-item.svg" />
     <Content Include="Views\Client\cart\assets\img\icon-cart.svg" />
@@ -103,6 +110,9 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Controllers\CategoriController.cs" />
+    <Compile Include="Controllers\IngredientsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -130,6 +140,20 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Administrator\login\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bar\orderDetails.aspx.cs">
+      <DependentUpon>orderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Bar\orderDetails.aspx.designer.cs">
+      <DependentUpon>orderDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bar\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Bar\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Client\cart\index.aspx.cs">

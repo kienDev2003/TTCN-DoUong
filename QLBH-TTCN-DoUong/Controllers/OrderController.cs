@@ -16,18 +16,38 @@ namespace QLBH_TTCN_DoUong.Controllers
             orderDAO = new OrderDAO();
         }
 
-        public List<OrderModel> getOrderNotYetServed()
+        public List<OrderModel> GetOrderNotYetServed()
         {
-            List<OrderModel> orderModels = new List<OrderModel>();
-
-            orderModels = orderDAO.GetOrderNotYetServed();
-
-            return orderModels;
+            return orderDAO.GetOrderNotYetServed();
         }
 
-        public int UpdateOrderServed(string orderID)
+        public bool UpdateOrderServed(string orderID)
         {
-            return orderDAO.UpdateStatusServedOrder(orderID);
+            int exec = orderDAO.UpdateStatusServedOrder(orderID);
+
+            if (exec > 0) return true;
+            return false;
+        }
+
+        public bool UpdateStatusPayment(string orderID)
+        {
+            int exec = orderDAO.UpdateStatusPayment(orderID);
+
+            if(exec > 0) return true;
+            return false;
+        }
+
+        public bool Insert(OrderModel order)
+        {
+            int exec = orderDAO.Insert(order);
+
+            if (exec > 0) return true;
+            return false;
+        }
+
+        public List<OrderModel> GetOrderNotYetPayment()
+        {
+            return orderDAO.GetOrderNotYetPayment();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace QLBH_TTCN_DoUong.Controllers
 
         public List<ProductModel> GetProductAll()
         {
-            return productDAO.Get();
+            return productDAO.Gets();
         }
 
         public string GetProductAndCategoriHtml()
@@ -125,6 +125,27 @@ namespace QLBH_TTCN_DoUong.Controllers
                 return false;
             }
             return true;
+        }
+
+        public List<ProductModel> SearchProductByName(string name)
+        {
+            return productDAO.SearchProductByName(name);
+        }
+
+        public bool Delete(int id)
+        {
+            int exec = productDAO.Delete(id);
+
+            if(exec > 0) return true;
+            return false;
+        }
+
+        public bool Update(ProductModel product)
+        {
+            int exec = productDAO.Update(product);
+
+            if(exec > 0) return true;
+            return false;
         }
     }
 }

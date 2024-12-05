@@ -40,7 +40,7 @@ namespace QLBH_TTCN_DoUong.DAO
             }
             return model;
         }
-        public List<ProductModel> Get()
+        public List<ProductModel> Gets()
         {
             List<ProductModel> listProduct = new List<ProductModel>();
             using (SqlDataReader dataReader = dBConnection.ExecuteReader("Product_Select_All", null))
@@ -101,6 +101,58 @@ namespace QLBH_TTCN_DoUong.DAO
                 }
             }
             return listProductByCategori;
+        }
+
+        public List<ProductModel> SearchProductByName(string name)
+        {
+            List<ProductModel> products = new List<ProductModel>();
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@productName",name}
+            };
+
+            using(SqlDataReader dataReader = dBConnection.ExecuteReader("Products_Select_By_Name", parameter))
+            {
+                while (dataReader.Read())
+                {
+                    ProductModel model = new ProductModel();
+                    model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
+                    model.Product_Name = dataReader["Product_Name"].ToString();
+                    model.Product_Describe = dataReader["Product_Describe"].ToString();
+                    model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
+                    model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
+                    model.Product_Image_Url = dataReader["Product_Image_Url"].ToString();
+
+                    products.Add(model);
+                }
+            }
+            return products;
+        }
+
+        public int Update(ProductModel product)
+        {
+            Dictionary<string, object> prameter = new Dictionary<string, object>
+            {
+                {"@productID",product.Product_Id },
+                {"@productName",product.Product_Name },
+                {"@productDescribe", product.Product_Describe },
+                {"@productPrice", product.Product_Price},
+                {"@productCategori", product.Product_Categori },
+                {"@productAvailability", product.Product_Availability },
+                {"@productImageUrl", product.Product_Image_Url }
+            };
+
+            return dBConnection.ExecuteNonQuery("Products_Update", prameter);
+        }
+
+        public int Delete(int productID)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@productId", productID }
+            };
+
+            return dBConnection.ExecuteNonQuery("Product_Delete", parameter);
         }
     }
 }

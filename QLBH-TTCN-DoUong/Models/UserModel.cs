@@ -14,5 +14,6 @@ namespace QLBH_TTCN_DoUong.Models
         public string email { get; set; }
         public string phone { get; set; }
         public int roleId { get; set; }
+        public string roleName { get; set; }
     }
 }

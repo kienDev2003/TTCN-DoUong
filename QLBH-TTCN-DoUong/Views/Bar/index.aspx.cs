@@ -28,7 +28,7 @@ namespace QLBH_TTCN_DoUong.Views.Bar
 
             List<OrderModel> orders = new List<OrderModel>();
 
-            orders = orderController.getOrderNotYetServed();
+            orders = orderController.GetOrderNotYetServed();
 
             foreach (var order in orders)
             {

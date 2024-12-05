@@ -21,27 +21,60 @@ namespace QLBH_TTCN_DoUong.Controllers
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return userOutput;
             
             int UserId = userDAO.GetId(username);
-            password = Common.SHA_256_Hash(password+UserId.ToString());
+            password = Common.MD5_Hash(password+UserId.ToString());
             
             userOutput = userDAO.Login(username, password);
             return userOutput;
         }
 
-        public int Register(UserModel userInput)
+        public bool Register(UserModel userInput)
         {
-            if(userInput == null) return -1;
+            if(userInput == null) return false;
 
             int isUserName = userDAO.GetId(userInput.userName);
-            if (isUserName > 0) return -2;
+            if (isUserName > 0) return false;
 
             int temp = userDAO.Register(userInput);
-            if (temp < 0) return -3;
+            if (temp < 0) return false;
 
             userInput.Id = int.Parse(userDAO.GetId(userInput.userName).ToString());
-            userInput.password = Common.SHA_256_Hash(userInput.password + userInput.Id.ToString());
+            userInput.password = Common.MD5_Hash(userInput.password + userInput.Id.ToString());
 
             int exec = userDAO.Update(userInput);
-            return exec;
+
+            if (exec > 0) return true;
+            return false;
+        }
+
+        public List<UserModel> Gets()
+        {
+            return userDAO.Gets();
+        }
+
+        public UserModel Get(int userID)
+        {
+            return userDAO.Get(userID);
+        }
+
+        public List<UserModel> SearchUserByName(string name)
+        {
+            return userDAO.SearchUserByName(name);
+        }
+
+        public bool Detele(int userID)
+        {
+            int exec = userDAO.Delete(userID);
+
+            if(exec > 0) return true;
+            return false;
+        }
+
+        public bool Update(UserModel user)
+        {
+            int exec = userDAO.Update(user);
+
+            if (exec > 0) return true;
+            return false;
         }
     }
 }

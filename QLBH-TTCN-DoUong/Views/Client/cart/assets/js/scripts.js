@@ -122,8 +122,6 @@ function checkOut() {
         orderDetails: orderDetails
     };
 
-    console.log(order);
-
     $.ajax({
         type: "POST",
         url: "index.aspx/checkOrder",

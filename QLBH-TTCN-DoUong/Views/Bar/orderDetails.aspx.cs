@@ -58,9 +58,9 @@ namespace QLBH_TTCN_DoUong.Views.Bar
         {
             OrderController orderController = new OrderController();
 
-            int c = orderController.UpdateOrderServed(orderID);
+            bool c = orderController.UpdateOrderServed(orderID);
 
-            if (c >= 0) Response.Redirect("./");
+            if (c) Response.Redirect("./");
         }
     }
 }

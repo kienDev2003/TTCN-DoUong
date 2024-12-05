@@ -126,7 +126,7 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
         {
             OrderDAO orderDAO = new OrderDAO();
             int kq = -1;
-            kq = orderDAO.AddOrder(order);
+            kq = orderDAO.Insert(order);
             return kq;
         }
 

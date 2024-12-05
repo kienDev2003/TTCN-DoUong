@@ -17,21 +17,41 @@ namespace QLBH_TTCN_DoUong.DAO
             dBConnection = new DBConnection();
         }
 
-        public int AddOrder(OrderModel order)
+        public int Insert(OrderModel order)
         {
-            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            Dictionary<string, object> prameter = new Dictionary<string, object>
             {
                 {"@orderID",order.OrderId },
+                {"@orderTableID",order.TableId },
                 {"@orderDate", order.OrderDate },
-                {"@orderTableID", order.TableId},
-                {"@orderTotalMoney", order.TotalAmount},
+                {"@orderPrice", order.TotalAmount},
                 {"@orderPaymentMethod", order.PaymentMethodId },
-                {"@orderServed",false }
+                {"@orderServed", order.Served },
+                {"@orderStatusPayment", order.StatusPayment }
             };
 
-            int kq = dBConnection.ExecuteNonQuery("Orders_Insert",parameter);
+            int kq = dBConnection.ExecuteNonQuery("Orders_Insert", prameter);
 
             return kq;
+        }
+
+        public List<OrderModel> GetOrderNotYetPayment()
+        {
+            List<OrderModel> orders = new List<OrderModel>();
+            using (SqlDataReader dataReader = dBConnection.ExecuteReader("Orders_Select_NotYetPayment", null))
+            {
+                while (dataReader.Read())
+                {
+                    OrderModel orderModel = new OrderModel();
+
+                    orderModel.OrderId = dataReader["Order_ID"].ToString();
+                    orderModel.TableId = int.Parse(dataReader["Order_TableID"].ToString());
+                    orderModel.OrderDate = dataReader["Order_Date"].ToString();
+
+                    orders.Add(orderModel);
+                }
+            }
+            return orders;
         }
 
         public List<OrderModel> GetOrderNotYetServed()
@@ -60,6 +80,15 @@ namespace QLBH_TTCN_DoUong.DAO
                 {"@orderID",orderID }
             };
             return dBConnection.ExecuteNonQuery("Order_Update_Status_Served",parameter);
+        }
+
+        public int UpdateStatusPayment(string orderID)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@orderID",orderID }
+            };
+            return dBConnection.ExecuteNonQuery("Order_Update_Status_Payment", parameter);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace QLBH_TTCN_DoUong.Models
         public int PaymentMethodId { get; set; }
         public bool Served {  get; set; }
 
+        public bool StatusPayment {  get; set; }
     }
 }

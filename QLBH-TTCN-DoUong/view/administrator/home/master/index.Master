@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.master.cs" Inherits="QLBH_TTCN_DoUong.view.administrator.home.master.index" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../master/master.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
+    <link rel="stylesheet" href="../assets/font/fontawesome-free-6.5.2-web/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Admin Dashboard</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header_name">
+                <h2 class="admin-title" style="display: block;">ADMIN PANEL</h2>
+                <span id="span_name" style="display: none;">ADM</span>
+                <i class="fa-solid fa-bars menu-icon" id="toggleSidebar"></i>
+            </div>
+            <div class="header_avatar">
+                <img src="asset/imge/admin.png" class="userImg" alt="Admin Avatar">
+                <div class="userName">
+                    <span>Phạm Ngọc Tuấn Anh</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="body">
+            <!-- Sidebar -->
+            <div class="sidebar expanded">
+                <ul>
+                    <li><a href="../report"><i class="fa-solid fa-chart-pie"></i><span>Thống kê</span></a></li>
+                    <li><a href="../user"><i class="fa-solid fa-users"></i><span>Tài khoản</span></a></li>
+                    <li><a href="../product"><i class="fa-brands fa-product-hunt"></i><span>Sản Phẩm</span></a></li>
+                    <li><a href="../ingredient"><i class="fa-solid fa-box"></i><span>Nguyên Liệu</span></a></li>
+                    <li><a href="../impot"><i class="fa-solid fa-truck-fast"></i><span>Nhập Hàng</span></a></li>
+                    <li><a href="../inventory"><i class="fa-solid fa-clipboard-list"></i><span>Tồn kho</span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
+                </ul>
+            </div>
+            <!-- Content -->
+            <div class="content">
+                <asp:ContentPlaceHolder runat="server" ID="content">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <strong>Copyright &copy; 2024 Tiên Lữ Quán</strong>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../master/master.js"></script>
+</body>
+</html>

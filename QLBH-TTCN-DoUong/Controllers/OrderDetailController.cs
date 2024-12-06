@@ -20,5 +20,16 @@ namespace QLBH_TTCN_DoUong.Controllers
         {
             return orderDetailDAO.GetOrderDetailsByOrderID(orderID);
         }
+
+        public int Add(List<OrderDetailModel> orderDetails)
+        {
+            int check = 0;
+            foreach (var orderDetail in orderDetails)
+            {
+                int c = orderDetailDAO.AddOrderDetails(orderDetail);
+                check += c;
+            }
+            return check;
+        }
     }
 }

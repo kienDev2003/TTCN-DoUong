@@ -147,5 +147,13 @@ namespace QLBH_TTCN_DoUong.Controllers
             if(exec > 0) return true;
             return false;
         }
+
+        public bool Add(ProductModel product)
+        {
+            int exec = productDAO.Add(product);
+
+            if(exec > 0) return true;
+            return false;
+        }
     }
 }

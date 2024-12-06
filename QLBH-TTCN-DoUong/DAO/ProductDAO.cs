@@ -156,5 +156,20 @@ namespace QLBH_TTCN_DoUong.DAO
 
             return dBConnection.ExecuteNonQuery("Product_Delete", parameter);
         }
+
+        public int Add(ProductModel product)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@productName",product.Product_Name },
+                {"@productDescribe", product.Product_Describe},
+                { "@productPrice",product.Product_Price},
+                { "@productCategori",product.Product_Categori},
+                {"@productAvailability",true },
+                {"@productImage_Url",product.Product_Image_Url }
+            };
+
+            return dBConnection.ExecuteNonQuery("Product_Insert", parameter);
+        }
     }
 }

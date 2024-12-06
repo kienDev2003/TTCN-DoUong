@@ -2212,6 +2212,8 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\CategoriDAO.cs" />
     <Compile Include="DAO\IngredientDAO.cs" />
+    <Compile Include="DAO\InventoryDAO.cs" />
+    <Compile Include="DAO\InventoryDetailDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderDetailDAO.cs" />
     <Compile Include="DAO\PaymentMethodDAO.cs" />
@@ -2222,6 +2224,8 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="Models\CategoriModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
+    <Compile Include="Models\InventoryDetailModel.cs" />
+    <Compile Include="Models\InventoryModel.cs" />
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderRequest.cs" />

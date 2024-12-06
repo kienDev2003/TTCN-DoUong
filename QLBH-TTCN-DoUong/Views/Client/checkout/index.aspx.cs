@@ -132,10 +132,9 @@ namespace QLBH_TTCN_DoUong.Views.Client.checkout
 
         private static int AddOrderDetails(List<OrderDetailModel> orderDetails)
         {
-            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            int kq = -1;
-            kq = orderDetailDAO.AddOrderDetails(orderDetails);
-            return kq;
+            OrderDetailController orderDetailController = new OrderDetailController();
+
+            return orderDetailController.Add(orderDetails);
         }
 
         private static int UpdateIngredientQuantity()

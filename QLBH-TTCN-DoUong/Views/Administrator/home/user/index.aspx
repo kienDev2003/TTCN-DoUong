@@ -40,7 +40,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    users = response.d;
+                    var users = response.d;
                     renderTable(users, PageIndex);
                 },
                 error: function (xhr, status, error) {

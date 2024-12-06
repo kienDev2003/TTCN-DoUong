@@ -51,6 +51,7 @@ namespace QLBH_TTCN_DoUong.DAO
                     model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
                     model.Product_Name = dataReader["Product_Name"].ToString();
                     model.Product_Describe = dataReader["Product_Describe"].ToString();
+                    model.Product_Categori_Name = dataReader["Categori_Name"].ToString();
                     model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
                     model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
                     model.Product_Image_Url = dataReader["Product_Image_Url"].ToString();
@@ -119,6 +120,7 @@ namespace QLBH_TTCN_DoUong.DAO
                     model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
                     model.Product_Name = dataReader["Product_Name"].ToString();
                     model.Product_Describe = dataReader["Product_Describe"].ToString();
+                    model.Product_Categori_Name = dataReader["Categori_Name"].ToString();
                     model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
                     model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
                     model.Product_Image_Url = dataReader["Product_Image_Url"].ToString();

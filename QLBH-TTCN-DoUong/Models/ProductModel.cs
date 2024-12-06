@@ -12,6 +12,7 @@ namespace QLBH_TTCN_DoUong.Models
         public string Product_Describe { get; set; }
         public float Product_Price { get; set; }
         public int Product_Categori { get; set; }
+        public string Product_Categori_Name { get; set; }
         public bool Product_Availability {  get; set; }
         public string Product_Image_Url { get; set; }
     }

@@ -18,10 +18,24 @@ namespace QLBH_TTCN_DoUong.Views.Administrator.home.product
         }
 
         [WebMethod]
-        public List<ProductModel> Gets()
+        public static List<ProductModel> GetProducts()
         {
             ProductController productController = new ProductController();
             return productController.GetProductAll();
+        }
+
+        [WebMethod]
+        public static List<ProductModel> SearchProductByName(string name)
+        {
+            ProductController productController = new ProductController();
+            return productController.SearchProductByName(name);
+        }
+
+        [WebMethod]
+        public static bool DeleteProduct(int productID)
+        {
+            ProductController productController = new ProductController();
+            return productController.Delete(productID);
         }
     }
 }

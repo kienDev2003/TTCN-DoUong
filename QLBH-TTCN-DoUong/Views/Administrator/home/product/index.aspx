@@ -1,15 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Administrator/home/index.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="QLBH_TTCN_DoUong.Views.Administrator.home.product.index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
     <div class="container_child">
-        <h2>Quản Lý Sản Phẩm</h2>
+        <h2>Sản phẩm</h2>
         <div class="header_child">
             <div class="search_child">
-                <input type="text" id="txtSearch" placeholder="Nhập tên sản phẩm">
-                <button onclick="btnSearch()">Tìm Kiếm</button>
+                <input type="text" id="txtSearch">
+                <input type="button" value="Tìm kiếm" onclick="btnSearch()">
             </div>
             <a href="editProduct.html">Thêm Sản Phẩm</a>
         </div>
@@ -22,6 +21,7 @@
                         <th>Mô Tả</th>
                         <th>Hình Ảnh</th>
                         <th>Loại Sản Phảm</th>
+                        <th>Trạng thái</th>
                         <th>Chức Năng</th>
                     </tr>
                 </thead>
@@ -33,18 +33,22 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Định nghĩa số sản phẩm trên mỗi trang
+        const PageSize = 6;
+        let PageIndex = 1;
 
+        // Tìm kiếm sản phẩm theo tên
         function btnSearch() {
             var txtSearch = document.getElementById("txtSearch").value;
             $.ajax({
                 type: "POST",
-                url: "index.aspx/SearchUserByName",
+                url: "index.aspx/SearchProductByName",
                 data: JSON.stringify({ name: txtSearch }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    users = response.d;
-                    renderTable(users, PageIndex);
+                    var products = response.d;
+                    renderTable(products, PageIndex); // Chuyển PageIndex vào đây
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
@@ -52,21 +56,17 @@
             });
         }
 
-        const PageSize = 9;
-        let PageIndex = 1;
-
+        // Hàm tải sản phẩm (load sản phẩm)
         function load() {
-            var products = [];
-
             $.ajax({
                 type: "POST",
-                url: "index.aspx/Gets",
+                url: "index.aspx/GetProducts",
                 data: JSON.stringify({}),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    products = response.d;
-                    renderTable(products, PageIndex);
+                    var products = response.d;
+                    renderTable(products, PageIndex); // Chuyển PageIndex vào đây
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
@@ -74,8 +74,8 @@
             });
         }
 
-        function btnDelete(userID) {
-            // Hiển thị hộp thoại xác nhận trước khi thực hiện AJAX xóa
+        // Xóa sản phẩm
+        function btnDelete(productID) {
             Swal.fire({
                 title: 'Thông báo!',
                 text: 'Bạn có chắc chắn muốn xóa?',
@@ -84,22 +84,20 @@
                 confirmButtonText: 'OK',
                 cancelButtonText: 'Hủy'
             }).then((result) => {
-
                 if (result.isConfirmed) {
-
                     $.ajax({
                         type: "POST",
-                        url: "index.aspx/DeleteUser",
-                        data: JSON.stringify({ userID: userID }),
+                        url: "index.aspx/DeleteProduct",
+                        data: JSON.stringify({ productID: productID }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
                             if (response.d === true) {
                                 var txtSearch = document.getElementById("txtSearch").value;
-                                if (txtSearch != '' && txtSearch != null) {
+                                if (txtSearch !== '' && txtSearch !== null) {
                                     btnSearch();
                                 } else {
-                                    load(PageIndex);
+                                    load();  // Để lại PageIndex là 1 khi xóa và tải lại
                                 }
                             }
                         },
@@ -109,36 +107,38 @@
                     });
                 }
             });
-
         }
 
-        function renderTable(products) {
+        // Hàm render bảng sản phẩm
+        function renderTable(products, PageIndex) {
             const start = (PageIndex - 1) * PageSize;
             const end = start + PageSize;
-            const currentEmployees = products.slice(start, end); // Lấy dữ liệu trang hiện tại
-
+            const currentProducts = products.slice(start, end); // Lấy dữ liệu trang hiện tại
+            console.log(products);
             const tableBody = document.getElementById('product_load');
             tableBody.innerHTML = ""; // Xóa nội dung cũ
-            currentEmployees.forEach(product => {
+            currentProducts.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                 <td>${product.Product_Name}</td>
-                <td>${product.Product_Describe}</td>
                 <td>${product.Product_Price}</td>
-                <td>${product.Product_Categori}</td>
-                <td>${product.Product_Availability}</td>
+                <td class="text-overflow">${product.Product_Describe}</td>
+                <td><img style="width: 40px;height: 40px;" src="${product.Product_Image_Url}"></td>
+                <td>${product.Product_Categori_Name}</td>
+                <td>${product.Product_Availability ? 'Bán' : 'Không bán'}</td>
                 <td>
-                    <a href="edit.aspx?userID=${user.Id}">Sửa</a>
-                    <input type="button" onclick="btnDelete(${user.Id})" class="btn" value="Xoa">
+                    <a href="editProduct.aspx?productID=${product.Product_Id}">Sửa</a>
+                    <input type="button" value="Xóa" onclick="btnDelete(${product.Product_Id})" class="btn">
                 </td>
-             `;
+            `;
                 tableBody.appendChild(row);
             });
-            setupPagination(users, PageIndex);
+            setupPagination(products);
         }
 
-        function setupPagination(users) {
-            const totalPages = Math.ceil(users.length / PageSize);
+        // Hàm phân trang
+        function setupPagination(products) {
+            const totalPages = Math.ceil(products.length / PageSize);
             const paginationDiv = document.getElementById('pagination');
             paginationDiv.innerHTML = ""; // Xóa nội dung cũ
 
@@ -154,11 +154,10 @@
                 if (PageIndex > 1) {
                     PageIndex--;
                     var txtSearch = document.getElementById("txtSearch").value;
-                    if (txtSearch != '' || txtSearch != null) {
+                    if (txtSearch !== '' && txtSearch !== null) {
                         btnSearch();
-                    }
-                    else {
-                        load(PageIndex);
+                    } else {
+                        load();
                     }
                 }
             });
@@ -166,20 +165,9 @@
 
             // Tạo các liên kết trang số
             const totalPagesToShow = 5; // Hiển thị tối đa 5 trang
-            let startPage = PageIndex - Math.floor(totalPagesToShow / 2);
-            let endPage = PageIndex + Math.floor(totalPagesToShow / 2);
+            let startPage = Math.max(1, PageIndex - Math.floor(totalPagesToShow / 2));
+            let endPage = Math.min(totalPages, PageIndex + Math.floor(totalPagesToShow / 2));
 
-            if (startPage < 1) {
-                startPage = 1;
-                endPage = totalPagesToShow;
-            }
-            if (endPage > totalPages) {
-                endPage = totalPages;
-                startPage = totalPages - totalPagesToShow + 1;
-            }
-            if (startPage < 1) {
-                startPage = 1;
-            }
             if (startPage > 1) {
                 const firstPage = document.createElement('a');
                 firstPage.href = "#";
@@ -188,15 +176,13 @@
                     event.preventDefault();
                     PageIndex = 1;
                     var txtSearch = document.getElementById("txtSearch").value;
-                    if (txtSearch != '' || txtSearch != null) {
+                    if (txtSearch !== '' && txtSearch !== null) {
                         btnSearch();
-                    }
-                    else {
-                        load(PageIndex);
+                    } else {
+                        load();
                     }
                 });
                 paginationDiv.appendChild(firstPage);
-
                 paginationDiv.appendChild(document.createTextNode("..."));
             }
 
@@ -212,11 +198,10 @@
                     event.preventDefault();
                     PageIndex = i;
                     var txtSearch = document.getElementById("txtSearch").value;
-                    if (txtSearch != '' || txtSearch != null) {
+                    if (txtSearch !== '' && txtSearch !== null) {
                         btnSearch();
-                    }
-                    else {
-                        load(PageIndex);
+                    } else {
+                        load();
                     }
                 });
 
@@ -233,11 +218,10 @@
                     event.preventDefault();
                     PageIndex = totalPages;
                     var txtSearch = document.getElementById("txtSearch").value;
-                    if (txtSearch != '' || txtSearch != null) {
+                    if (txtSearch !== '' && txtSearch !== null) {
                         btnSearch();
-                    }
-                    else {
-                        load(PageIndex);
+                    } else {
+                        load();
                     }
                 });
                 paginationDiv.appendChild(lastPage);
@@ -255,18 +239,18 @@
                 if (PageIndex < totalPages) {
                     PageIndex++;
                     var txtSearch = document.getElementById("txtSearch").value;
-                    if (txtSearch != '' || txtSearch != null) {
+                    if (txtSearch !== '' && txtSearch !== null) {
                         btnSearch();
-                    }
-                    else {
-                        load(PageIndex);
+                    } else {
+                        load();
                     }
                 }
             });
             paginationDiv.appendChild(nextPage);
         }
 
+        // Khởi tạo tải dữ liệu khi trang được tải
         load();
-
     </script>
+
 </asp:Content>

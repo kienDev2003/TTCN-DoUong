@@ -15,12 +15,12 @@ namespace QLBH_TTCN_DoUong.Views.Administrator.home
         {
             if(!IsPostBack)
             {
-                if (Session["login"] == null) Response.Redirect("../../login/");
-                else
-                {
-                    UserModel user = Session["login"] as UserModel;
-                    nameUserLogin.InnerText = user.fullName;
-                }
+                //if (Session["login"] == null) Response.Redirect("../../login/");
+                //else
+                //{
+                //    UserModel user = Session["login"] as UserModel;
+                //    nameUserLogin.InnerText = user.fullName;
+                //}
             }
         }
 

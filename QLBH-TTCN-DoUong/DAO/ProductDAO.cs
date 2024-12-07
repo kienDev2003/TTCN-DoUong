@@ -32,6 +32,7 @@ namespace QLBH_TTCN_DoUong.DAO
                 {
                     model.Product_Id = int.Parse(dataReader["Product_ID"].ToString());
                     model.Product_Name = dataReader["Product_Name"].ToString();
+                    model.Product_Categori = int.Parse(dataReader["Product_Categori"].ToString());
                     model.Product_Describe = dataReader["Product_Describe"].ToString();
                     model.Product_Price = float.Parse(dataReader["Product_Price"].ToString());
                     model.Product_Availability = bool.Parse(dataReader["Product_Availability"].ToString());
@@ -144,7 +145,7 @@ namespace QLBH_TTCN_DoUong.DAO
                 {"@productImageUrl", product.Product_Image_Url }
             };
 
-            return dBConnection.ExecuteNonQuery("Products_Update", prameter);
+            return dBConnection.ExecuteNonQuery("Product_Update", prameter);
         }
 
         public int Delete(int productID)
@@ -166,7 +167,7 @@ namespace QLBH_TTCN_DoUong.DAO
                 { "@productPrice",product.Product_Price},
                 { "@productCategori",product.Product_Categori},
                 {"@productAvailability",true },
-                {"@productImage_Url",product.Product_Image_Url }
+                {"@productImageUrl",product.Product_Image_Url }
             };
 
             return dBConnection.ExecuteNonQuery("Product_Insert", parameter);

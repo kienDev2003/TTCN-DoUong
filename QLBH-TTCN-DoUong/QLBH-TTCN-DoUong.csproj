@@ -2156,6 +2156,12 @@
     <Content Include="view\administrator\home\assets\font\fontawesome-free-6.5.2-web\svgs\solid\z.svg" />
     <Content Include="view\administrator\home\master\master.css" />
     <Content Include="view\administrator\home\master\master.js" />
+    <Content Include="view\administrator\home\product\edit.aspx" />
+    <Content Include="view\administrator\home\product\editProduct.css" />
+    <Content Include="view\administrator\home\product\editProduct.js" />
+    <Content Include="view\administrator\home\product\index.aspx" />
+    <Content Include="view\administrator\home\product\product.js" />
+    <Content Include="view\administrator\home\product\product.css" />
     <Content Include="view\administrator\home\user\edit.aspx" />
     <Content Include="view\administrator\home\user\index.aspx" />
     <Content Include="view\administrator\home\user\user.css" />
@@ -2227,6 +2233,7 @@
     <Compile Include="Models\OrderRequest.cs" />
     <Compile Include="Models\PaymentMethodModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ProductRequest.cs" />
     <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -2237,6 +2244,20 @@
     </Compile>
     <Compile Include="view\administrator\home\master\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="view\administrator\home\product\edit.aspx.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\administrator\home\product\edit.aspx.designer.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\administrator\home\product\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\administrator\home\product\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\administrator\home\user\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
@@ -2361,9 +2382,9 @@
   <ItemGroup>
     <Folder Include="view\administrator\home\ingredient\" />
     <Folder Include="view\administrator\home\inventory\" />
-    <Folder Include="view\administrator\home\product\" />
     <Folder Include="view\administrator\login\asset\font\" />
     <Folder Include="view\administrator\login\asset\resset\" />
+    <Folder Include="view\imageproduct\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -46,7 +46,7 @@ namespace QLBH_TTCN_DoUong.Controllers
                     foreach (var product in listProduct)
                     {
                         string htmlProductItem = $"<div class=\"item\">" +
-                                                    $"<img src=\"{product.Product_Image_Url}\" alt=\"\" />" +
+                                                    $"<img src=\"{product.Product_Image_Url.Replace("../../","../")}\" alt=\"\" />" +
                                                     $"<div class=\"des\">" +
                                                         $"<p class=\"nameItem\">{product.Product_Name}</p>" +
                                                         $"<p class=\"dseItem\">" +

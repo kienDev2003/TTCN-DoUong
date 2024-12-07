@@ -31,5 +31,10 @@ namespace QLBH_TTCN_DoUong.Controllers
             }
             return html;
         }
+
+        public List<CategoriModel> GetList()
+        {
+            return categoriDAO.Get();
+        }
     }
 }

@@ -69,6 +69,15 @@ namespace QLBH_TTCN_DoUong.view.administrator.home.product
         protected global::System.Web.UI.WebControls.FileUpload fileImageProduct;
 
         /// <summary>
+        /// cboProductAvailability control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cboProductAvailability;
+
+        /// <summary>
         /// btnCRUD control.
         /// </summary>
         /// <remarks>

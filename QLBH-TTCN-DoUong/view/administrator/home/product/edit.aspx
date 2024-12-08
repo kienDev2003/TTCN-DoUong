@@ -14,7 +14,6 @@
             <div class="mb-2">
                 <label for="Product_Categori" class="form-label">Loại sản phẩm</label>
                 <asp:DropDownList class="form-select" ID="cboCategori" runat="server">
-                    
                 </asp:DropDownList>
             </div>
             <div class="mb-2">
@@ -33,6 +32,13 @@
                 <label for="ProDuct_Image_Url" class="form-label"></label>
                 <asp:FileUpload runat="server" ID="fileImageProduct" accept="image/*" />
                 <input type="text" id="txtUrlImage" hidden />
+            </div>
+            <div class="mb-2">
+                <label for="cboProductAvailability" class="form-label">Trạng thái</label>
+                <asp:DropDownList class="form-select" ID="cboProductAvailability" runat="server">
+                    <asp:ListItem Value="1">Bán</asp:ListItem>
+                    <asp:ListItem Value="0">Không bán</asp:ListItem>
+                </asp:DropDownList>
             </div>
             <input type="button" class="btninsert" id="btnCRUD" runat="server" onserverclick="btnCRUD_ServerClick" value="Lưu">
             <a style="margin-left: 10px;" href="./" class="btn btn-danger mb-2">Hủy</a>

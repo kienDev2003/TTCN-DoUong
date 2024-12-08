@@ -10,6 +10,8 @@ namespace QLBH_TTCN_DoUong.Models
         public int ingredientID { get; set; }
         public string ingredientName { get; set; }
         public int ingredientQuantity { get; set; }
+        public float ingredienPrice { get; set; }
+        public string ingredientUnitName { get; set; }
         public int ingredientUnitID { get; set; }
     }
 }

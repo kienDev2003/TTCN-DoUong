@@ -22,6 +22,7 @@
                         <th>Mô Tả</th>
                         <th>Hình Ảnh</th>
                         <th>Loại Sản Phảm</th>
+                        <th>Trạng thái</th>
                         <th>Chức Năng</th>
                     </tr>
                 </thead>

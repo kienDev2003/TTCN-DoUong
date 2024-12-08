@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Xml.Linq;
 using QLBH_TTCN;
 using QLBH_TTCN_DoUong.Models;
 
@@ -29,7 +30,9 @@ namespace QLBH_TTCN_DoUong.DAO
                     ingredient.ingredientID = int.Parse(dataReader["Ingredient_ID"].ToString());
                     ingredient.ingredientName = dataReader["Ingredient_Name"].ToString();
                     ingredient.ingredientQuantity = int.Parse(dataReader["Ingredient_Quantity"].ToString());
-                    ingredient.ingredientUnitID = int.Parse(dataReader["Ingredient_Unit"].ToString());
+                    ingredient.ingredienPrice = float.Parse(dataReader["Ingredient_Price"].ToString());
+                    ingredient.ingredientUnitID = int.Parse(dataReader["Unit_ID"].ToString());
+                    ingredient.ingredientUnitName = dataReader["Unit_Name"].ToString();
 
                     listIngredient.Add(ingredient);
                 }
@@ -53,7 +56,9 @@ namespace QLBH_TTCN_DoUong.DAO
                     ingredient.ingredientID = int.Parse(dataReader["Ingredient_ID"].ToString());
                     ingredient.ingredientName = dataReader["Ingredient_Name"].ToString();
                     ingredient.ingredientQuantity = int.Parse(dataReader["Ingredient_Quantity"].ToString());
-                    ingredient.ingredientUnitID = int.Parse(dataReader["Ingredient_Unit"].ToString());
+                    ingredient.ingredienPrice = float.Parse(dataReader["Ingredient_Price"].ToString());
+                    ingredient.ingredientUnitID = int.Parse(dataReader["Unit_ID"].ToString());
+                    ingredient.ingredientUnitName = dataReader["Unit_Name"].ToString();
                 }
             }
             return ingredient;
@@ -69,6 +74,69 @@ namespace QLBH_TTCN_DoUong.DAO
 
             int check = dBConnection.ExecuteNonQuery("Ingredients_UpdateQuantity", parameter);
             return check;
+        }
+
+        public List<IngredientModel> SearchIngredientByName(string name)
+        {
+            List<IngredientModel> ingredients = new List<IngredientModel>();
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@ingredientName",name }
+            };
+            using(SqlDataReader dataReader = dBConnection.ExecuteReader("Ingredient_Search_By_Name", parameter))
+            {
+                while(dataReader.Read())
+                {
+                    IngredientModel ingredient = new IngredientModel();
+
+                    ingredient.ingredientID = int.Parse(dataReader["Ingredient_ID"].ToString());
+                    ingredient.ingredientName = dataReader["Ingredient_Name"].ToString();
+                    ingredient.ingredientQuantity = int.Parse(dataReader["Ingredient_Quantity"].ToString());
+                    ingredient.ingredienPrice = float.Parse(dataReader["Ingredient_Price"].ToString());
+                    ingredient.ingredientUnitID = int.Parse(dataReader["Unit_ID"].ToString());
+                    ingredient.ingredientUnitName = dataReader["Unit_Name"].ToString();
+
+                    ingredients.Add(ingredient);
+                }
+            }
+            return ingredients;
+        }
+
+        public int Delete(int ingredientID)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@ingredient_ID",ingredientID }
+            };
+
+            return dBConnection.ExecuteNonQuery("Ingredients_Delete", parameter);
+        }
+
+        public int Add(IngredientModel ingredient)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@ingredient_Name",ingredient.ingredientName },
+                {"@ingredient_Quantity", ingredient.ingredientQuantity },
+                {"@ingredient_Price", ingredient.ingredienPrice },
+                {"@ingredient_Unit", ingredient.ingredientUnitID }
+            };
+
+            return dBConnection.ExecuteNonQuery("Ingredients_Insert", parameter);
+        }
+
+        public int Update(IngredientModel ingredient)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                {"@ingredient_ID", ingredient.ingredientID },
+                {"@ingredient_Name",ingredient.ingredientName },
+                {"@ingredient_Quantity", ingredient.ingredientQuantity },
+                {"@ingredient_Price", ingredient.ingredienPrice },
+                {"@ingredient_Unit", ingredient.ingredientUnitID }
+            };
+
+            return dBConnection.ExecuteNonQuery("Ingredients_Update", parameter);
         }
     }
 }

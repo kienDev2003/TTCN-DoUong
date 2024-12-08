@@ -91,6 +91,9 @@ namespace QLBH_TTCN_DoUong.view.administrator.home.product
             product.Product_Price = int.Parse(txtProduct_Price.Value);
             product.Product_Categori = int.Parse(cboCategori.SelectedValue);
             product.Product_Image_Url = SaveImageFile();
+            
+            if(cboProductAvailability.SelectedValue == "1") product.Product_Availability = true;
+            else product.Product_Availability = false;
 
 
             if (productID < 0)
@@ -103,6 +106,14 @@ namespace QLBH_TTCN_DoUong.view.administrator.home.product
                 if (product.Product_Image_Url != "")
                 {
                     DeleteImage(productID);
+                }
+                else
+                {
+                    ProductModel temp = new ProductModel();
+                    ProductController productController = new ProductController();
+
+                    temp = productController.get(productID);
+                    product.Product_Image_Url = temp.Product_Image_Url;
                 }
                 Update(product);
             }
@@ -132,6 +143,8 @@ namespace QLBH_TTCN_DoUong.view.administrator.home.product
             txtProduct_Describe.Value = model.Product_Describe;
             txtProduct_Price.Value = model.Product_Price.ToString();
             cboCategori.SelectedValue = model.Product_Categori.ToString();
+            if (bool.Parse(model.Product_Availability.ToString())) cboProductAvailability.SelectedValue = "1";
+            else cboProductAvailability.SelectedValue = "0";
         }
     }
 }

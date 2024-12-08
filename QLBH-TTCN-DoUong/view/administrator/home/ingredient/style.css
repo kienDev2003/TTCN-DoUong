@@ -1,0 +1,163 @@
+.container_child{
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    background: #fff;
+    border-radius: 8px;
+    padding: 7px;
+    position: relative;
+}
+.title_child{
+    color: #333;
+margin-bottom: 20px;
+font-size: 24px;
+font-weight: bold;
+}
+.header_child {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.header_child a {
+padding: 10px 15px;
+background-color: #32b77f;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.3s ease;
+text-decoration: none;
+}
+
+.header_child button:hover {
+background-color: #32b77f;
+}
+
+.search_child {
+display: flex;
+align-items: center;
+}
+
+.search_child input[type="text"] {
+padding: 8px 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+margin-right: 10px;
+font-size: 14px;
+}
+.search_child input[type="button"] {
+padding: 8px 15px;
+background-color: #28a745;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 14px;
+transition: background-color 0.3s ease;
+}
+.search_child input[type="button"]:hover {
+background-color: #218838;
+}
+.tb_load {
+padding: 0px;
+}
+.tb_load table {
+width: 100%;
+border-collapse: collapse;
+background-color: white;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+overflow: hidden;
+}
+.tb_load table thead tr {
+background-color: #657a71;
+color: white;
+}
+.tb_load table th, 
+.tb_load table td {
+padding: 15px;
+text-align: left;
+border-bottom: 1px solid #ddd;
+}
+.tb_load table th {
+text-transform: uppercase;
+}
+.tb_load table tbody tr:nth-child(odd) {
+background-color: #f9f9f9;
+}
+.tb_load table tbody tr:nth-child(even) {
+background-color: #e3f2fd;
+}
+.tb_load table tbody tr:hover {
+background-color: #bbdefb;
+}
+table td input {
+padding: 5px 10px;
+font-size: 14px;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 0 5px;
+transition: background-color 0.3s ease;
+}
+table td a {
+padding: 5px 10px;
+font-size: 14px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+text-decoration: none;
+margin: 0 5px;
+transition: background-color 0.3s ease;
+}
+
+table td a:hover {
+background-color: #0056b3;
+}
+
+table td input.btn {
+background-color: #dc3545;
+}
+
+table td input.btn:hover {
+background-color: #c82333;
+}
+.pagination {
+display: inline-block;
+padding: 10px;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+background-color: #fff;
+text-align: center;
+position: absolute;
+border-top: 1px solid #ddd;
+}
+.pagination a {
+padding: 8px 16px;
+margin: 4px;
+text-decoration: none;
+border: 1px solid #ddd;
+border-radius: 4px;
+color: #007bff;
+}
+.pagination a:hover {
+background-color: #ddd;
+}
+
+.pagination .active {
+background-color: #007bff;
+color: white;
+}
+
+.pagination .disabled {
+pointer-events: none;
+color: #ccc;
+}

@@ -80,7 +80,6 @@ namespace QLBH_TTCN_DoUong.view.administrator.home.product
                     File.Delete(physicalPath);
                 }
             }
-
         }
 
         protected void btnCRUD_ServerClick(object sender, EventArgs e)

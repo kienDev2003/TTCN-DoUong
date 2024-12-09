@@ -19,7 +19,6 @@
                     <tr>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá Sản Phẩm</th>
-                        <th>Mô Tả</th>
                         <th>Hình Ảnh</th>
                         <th>Loại Sản Phảm</th>
                         <th>Trạng thái</th>

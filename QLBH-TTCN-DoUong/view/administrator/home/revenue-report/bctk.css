@@ -1,0 +1,173 @@
+
+.container_child {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    background: #fff;
+    border-radius: 8px;
+    padding: 7px;
+    position: relative;
+}
+
+.pagination {
+    display: inline-block;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    z-index: 9;
+    border-top: 1px solid #ddd;
+}
+
+
+
+@media screen and (max-width: 1376px){
+
+    .date{
+        display: flex;
+        flex-direction: column;
+        
+
+    }
+   .chucNang{
+    bottom: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    span{
+        text-align: center;
+    }
+    select{
+        display: flex;
+        margin: 0 auto;
+    }
+   }
+}
+
+.date{
+    display: flex;
+    flex-direction: row;
+    width: 5%;
+}
+
+
+.pagination a {
+    padding: 8px 16px;
+    margin: 4px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled {
+    pointer-events: none;
+    color: #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px; 
+}
+span {
+    padding-right: 15px;
+}
+
+input {
+    border-radius: 5px;
+    width: 90px;
+    height: 30px;
+}
+
+select {
+    border-radius: 5px;
+    margin-right: 20px;
+    width: 90px;
+    height: 30px;
+}
+
+input[type="button"] {
+    background-color: #007bff;
+    border-radius: 5px;
+    margin: 0 20px;
+    width: 90px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 17px;
+   
+}
+.button{
+    background-color: #007bff;
+    border-radius: 5px;
+    margin: 0 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 17px;
+
+}
+#table_container, #table_detail {
+    width: 100%;
+    margin: 50px  auto;
+    text-align: center;
+    tr{
+        height: 50px;
+    }
+    tr:nth-child(even) {
+        background-color: #e3f2fd;
+      }
+    thead{
+        background-color: #657a71;
+        height: 70px;
+    }
+    tbody tr:hover{
+        background-color: #cfe2ff
+        ;
+    }
+    tbody button{
+        border: none;
+    }
+
+    tbody button:hover{
+        background-color: dodgerblue;
+    }
+    
+}
+h1{
+    float: left;
+    font-size: 30px;
+}
+
+#popup {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+#overlay {
+    backdrop-filter: blur(4px);
+}
+
+
+.line {
+    border-bottom: 1px solid black;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+

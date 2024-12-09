@@ -36,7 +36,7 @@
             <!-- Sidebar -->
             <div class="sidebar expanded">
                 <ul>
-                    <li><a href="../report"><i class="fa-solid fa-chart-pie"></i><span>Thống kê</span></a></li>
+                    <li><a href="../revenue-report"><i class="fa-solid fa-chart-pie"></i><span>Thống kê doanh thu</span></a></li>
                     <li><a href="../user"><i class="fa-solid fa-users"></i><span>Tài khoản</span></a></li>
                     <li><a href="../product"><i class="fa-brands fa-product-hunt"></i><span>Sản Phẩm</span></a></li>
                     <li><a href="../ingredient"><i class="fa-solid fa-box"></i><span>Nguyên Liệu</span></a></li>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <!-- Content -->
-            <div class="content">
+            <div class="content" style="position:relative">
                 <asp:ContentPlaceHolder runat="server" ID="content">
                 </asp:ContentPlaceHolder>
             </div>

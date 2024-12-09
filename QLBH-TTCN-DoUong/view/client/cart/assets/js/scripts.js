@@ -110,14 +110,9 @@ function deleteProduct(input) {
 
 //hàm render Order
 function checkOut() {
-    var selectElement = document.getElementById('payment');
-    var selectedOption = selectElement.options[selectElement.selectedIndex];
-
-    var paymentMethod_ID = selectedOption.value;
     var totalPrice = txtTotalPrice.innerText;
 
     var order = {
-        paymentMethod_ID: paymentMethod_ID,
         totalPrice: totalPrice,
         orderDetails: orderDetails
     };

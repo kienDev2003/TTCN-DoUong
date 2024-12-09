@@ -13,14 +13,5 @@ namespace QLBH_TTCN_DoUong.Views.Client.cart
 
     public partial class index
     {
-
-        /// <summary>
-        /// payment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect payment;
     }
 }

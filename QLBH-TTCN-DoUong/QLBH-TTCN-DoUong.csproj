@@ -2159,14 +2159,23 @@
     <Content Include="view\administrator\home\ingredient\index.aspx" />
     <Content Include="view\administrator\home\ingredient\ingredients.js" />
     <Content Include="view\administrator\home\ingredient\style.css" />
+    <Content Include="view\administrator\home\inventory\index.aspx" />
+    <Content Include="view\administrator\home\inventory\index.js" />
+    <Content Include="view\administrator\home\inventory\styles.css" />
     <Content Include="view\administrator\home\master\master.css" />
     <Content Include="view\administrator\home\master\master.js" />
+    <Content Include="view\administrator\home\pay\bctk.css" />
+    <Content Include="view\administrator\home\pay\index.aspx" />
+    <Content Include="view\administrator\home\pay\thanhToan.js" />
     <Content Include="view\administrator\home\product\edit.aspx" />
     <Content Include="view\administrator\home\product\editProduct.css" />
     <Content Include="view\administrator\home\product\editProduct.js" />
     <Content Include="view\administrator\home\product\index.aspx" />
     <Content Include="view\administrator\home\product\product.js" />
     <Content Include="view\administrator\home\product\product.css" />
+    <Content Include="view\administrator\home\revenue-report\bctk.css" />
+    <Content Include="view\administrator\home\revenue-report\index.aspx" />
+    <Content Include="view\administrator\home\revenue-report\bctk.js" />
     <Content Include="view\administrator\home\user\edit.aspx" />
     <Content Include="view\administrator\home\user\index.aspx" />
     <Content Include="view\administrator\home\user\user.css" />
@@ -2260,12 +2269,26 @@
     <Compile Include="view\administrator\home\ingredient\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="view\administrator\home\inventory\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\administrator\home\inventory\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="view\administrator\home\master\index.Master.cs">
       <DependentUpon>index.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\administrator\home\master\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="view\administrator\home\pay\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\administrator\home\pay\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\administrator\home\product\edit.aspx.cs">
       <DependentUpon>edit.aspx</DependentUpon>
@@ -2279,6 +2302,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\administrator\home\product\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\administrator\home\revenue-report\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\administrator\home\revenue-report\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\administrator\home\user\edit.aspx.cs">
@@ -2402,7 +2432,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="view\administrator\home\inventory\" />
+    <Folder Include="view\administrator\home\pay\bank-transfer\" />
     <Folder Include="view\administrator\login\asset\font\" />
     <Folder Include="view\administrator\login\asset\resset\" />
     <Folder Include="view\imageproduct\" />

@@ -44,13 +44,6 @@
                     <p class="total">Tổng: <span id="txtTotalPrice" class="float-end">VND</span></p>
                 </div>
 
-                <!-- Payment Method -->
-                <div class="payment-method mt-4">
-                    <label for="payment" class="form-label">Phương thức thanh toán</label>
-                    <select id="payment" runat="server" class="form-select">
-                    </select>
-                </div>
-
                 <!-- Checkout Button -->
                 <button onclick="checkOut()" class="btn-checkout mt-3">Tiến hành thanh toán</button>
             </div>

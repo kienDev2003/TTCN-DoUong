@@ -24,7 +24,7 @@ namespace QLBH_TTCN_DoUong.DAO
                 {"@orderID",order.OrderId },
                 {"@orderTableID",order.TableId },
                 {"@orderDate", order.OrderDate },
-                {"@orderPrice", order.TotalAmount},
+                {"@orderTotalMoney", order.TotalAmount},
                 {"@orderPaymentMethod", order.PaymentMethodId },
                 {"@orderServed", order.Served },
                 {"@orderStatusPayment", order.StatusPayment }
@@ -47,6 +47,7 @@ namespace QLBH_TTCN_DoUong.DAO
                     orderModel.OrderId = dataReader["Order_ID"].ToString();
                     orderModel.TableId = int.Parse(dataReader["Order_TableID"].ToString());
                     orderModel.OrderDate = dataReader["Order_Date"].ToString();
+                    orderModel.TotalAmount = float.Parse(dataReader["Order_TotalMoney"].ToString());
 
                     orders.Add(orderModel);
                 }

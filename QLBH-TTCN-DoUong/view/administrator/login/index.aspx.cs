@@ -42,7 +42,7 @@ namespace QLBH_TTCN_DoUong.Views.Administrator.Login
                 }
                 
                 Session["login"] = user;
-                Response.Redirect("../home/");
+                Response.Redirect("../home/revenue-report/");
             }
             
         }

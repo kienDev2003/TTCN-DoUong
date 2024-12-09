@@ -1,4 +1,4 @@
-const PageSize = 6;
+const PageSize = 5;
 let PageIndex = 1;
 
 function btnSearch() {
@@ -82,7 +82,6 @@ function renderTable(products) {
         row.innerHTML = `
                             <td>${product.Product_Name}</td>
                             <td>${product.Product_Price}</td>
-                            <td>${product.Product_Describe}</td>
                             <td><img src="${product.Product_Image_Url}"></td>
                             <td>${product.Product_Categori_Name}</td>
                             <td>${product.Product_Availability ? 'Bán' : 'Không bán'}</td>
